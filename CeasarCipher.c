@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> //Standard input and output
 
 
 
@@ -35,10 +35,10 @@ the message. It also has if statements that test whether the input message has s
 does not encrypt them.
 */
 void encryption (char *x,int key){
-    int i = 0; 
-    while (x[i] != '\0')    {
-        x[i] = x[i] + key;
-        if(x[i] > 'Z')  {
+    int i = 0; //initialise integer i to 0 to allow it to start at first array input
+    while (x[i] != '\0')    {//while the i'th value does not equal null the loop continues
+        x[i] = x[i] + key;//adds the encryption key to i'th value
+        if(x[i] > 'Z')  {//This if statement rotates letters back to A if key is positive
             if(x[i] > 91 + key)  {//symbols above Z will not be encrypted
                 x[i] = x[i] - key + 26;
             }
@@ -46,13 +46,12 @@ void encryption (char *x,int key){
         }
 
 
-        else if(x[i] < 'A')   {
-            if(x[i]  < 65 + key) { //symbols below A will not be encrypted
+        else if(x[i] < 'A')   {//This else if statement rotates numbers back to Z if key is negative
+            if (x[i]  < 65 + key) { //symbols below A will not be encrypted
                 x[i] = x[i] - key - 26;
-            }
+               }
             x[i] = x[i] +26;
+         }
+         i++;//adds 1 onto i so it moves onto the next value in the loop
         }
-
-        i++;
-    }
     }
