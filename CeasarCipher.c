@@ -8,17 +8,15 @@ void encryption(char *x, int key);
 int main()  {
     
     // Initialise variables and string
-char message[100]= "Encrypt This";
-int key=5, i=0;
+char message[100];
+int key, i=0;
 
     /*Prompts user to enter message and key and stores them as string array and integer value k*/
-   
-    /*------------- String and key hardcoded for testing, ignore this shit.------------
     printf("Enter message you want encrypted\n");
-    scanf("%c", message);
+    scanf("%s", message);
     printf("Enter the encryption key between -25 and 25\n");
     scanf("%d", &key);
-    ---------------------------------------------------------------------------------*/
+
     
     /* Changes message from lower case to uppercase*/
     
@@ -27,21 +25,26 @@ int key=5, i=0;
         message[i] = message [i] - 32;
         ++i;
     }
-    //calls function to encrypt message and saves encrypted char as encrypted.
+    //calls function to encrypt message.
     encryption(message, key);
-    printf("%s", message);
+    printf("%s\n", message);
 }    
 //Function definition
 void encryption (char *x,int key){
     int i = 0; 
     while (x[i] != '\0')    {
         x[i] = x[i] + key;
-        if(x[i] > 'Z')    {
+        if(x[i] > 'Z')  {
+            if(x[i] > 91 + key)  {//symbols above Z will not change
+                x[i] = x[i] - key + 26;
+            }
             x[i] = x[i] - 26;
         }
+
+
         else if(x[i] < 'A')   {
-            if(x[i] == 32 + key) {
-                x[i] = 32 - 26;    
+            if(x[i]  < 65 + key) { //symbols below A will not change
+                x[i] = x[i] - key - 26;
             }
             x[i] = x[i] +26;
         }
