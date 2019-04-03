@@ -3,7 +3,8 @@
 
 
 // declare function
-char encryption(char x, int key);
+void encryption(char *x, int key);
+
 int main()  {
     
     // Initialise variables and string
@@ -11,6 +12,7 @@ char message[100]= "Encrypt This";
 int key=5, i=0;
 
     /*Prompts user to enter message and key and stores them as string array and integer value k*/
+   
     /*------------- String and key hardcoded for testing, ignore this shit.------------
     printf("Enter message you want encrypted\n");
     scanf("%c", message);
@@ -25,17 +27,25 @@ int key=5, i=0;
         message[i] = message [i] - 32;
         ++i;
     }
-    char encrypted = encryption(message[i], key);
-    printf("%c", encrypted);
+    //calls function to encrypt message and saves encrypted char as encrypted.
+    encryption(message, key);
+    printf("%s", message);
 }    
-
-char encryption (char x,int key){
-    int i = 0;
-    while (i < '\0')
-    x = x + key;
-        if(x > 'Z')    {
-        x = x - 26;
-        ++i;
+//Function definition
+void encryption (char *x,int key){
+    int i = 0; 
+    while (x[i] != '\0')    {
+        x[i] = x[i] + key;
+        if(x[i] > 'Z')    {
+            x[i] = x[i] - 26;
         }
-    return x;
+        else if(x[i] < 'A')   {
+            if(x[i] == 32 + key) {
+                x[i] = 32 - 26;    
+            }
+            x[i] = x[i] +26;
+        }
+
+        i++;
+    }
     }
