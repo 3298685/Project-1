@@ -1,14 +1,16 @@
 #include <stdio.h>
 
-// Initialise variables, string and declare function.
-char message[100]= "Encrypt This";
-int key=5, i=0, x=0;
-char encryption(int x);
 
-/*Prompts user to enter message and key and stores them as string array and integer value k*/
 
+// declare function
+char encryption(char x, int key);
 int main()  {
     
+    // Initialise variables and string
+char message[100]= "Encrypt This";
+int key=5, i=0;
+
+    /*Prompts user to enter message and key and stores them as string array and integer value k*/
     /*------------- String and key hardcoded for testing, ignore this shit.------------
     printf("Enter message you want encrypted\n");
     scanf("%c", message);
@@ -23,11 +25,12 @@ int main()  {
         message[i] = message [i] - 32;
         ++i;
     }
-    
-    char encryption(message[i]);
-    
+    char encrypted = encryption(message[i], key);
+    printf("%c", encrypted);
+}    
 
-char encryption (int x){
+char encryption (char x,int key){
+    int i = 0;
     while (i < '\0')
     x = x + key;
         if(x > 'Z')    {
@@ -36,4 +39,3 @@ char encryption (int x){
         }
     return x;
     }
-}
