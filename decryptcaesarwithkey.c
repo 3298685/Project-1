@@ -45,16 +45,5 @@ void decryption (char *x,int key) {
             x[i] = x[i];
             i++;// adds 1 onto i to move onto the next value
         }
-        else {//while the i'th value of message does not equal null the loop continues
-            int a;
-            a = (x[i] - 65 - key );
-            if (a < 0) {
-             a = a + 26;
-            x[i] = a % 26 + 65;
-            }
-            else 
-            x[i] = a % 26 + 65;//The letters are given a value between 0 and 25 then encrypted and given back there original ascii number.
-            i++;
-        }   
     }
 }
