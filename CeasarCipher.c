@@ -14,7 +14,7 @@ int key, i=0;
     /*Prompts user to enter message and key and stores them as string array and integer value k*/
     printf("Enter message you want encrypted\n");
     scanf("%s", message);
-    printf("Enter the encryption key between -25 and 25\n");
+    printf("Enter the encryption key between 0 and 26\n");
     scanf("%d", &key);
 
     
@@ -41,16 +41,9 @@ void encryption (char *x,int key){
             x[i] = x[i];
             i++;// adds 1 onto i to move onto the next value
         }
-                /* This else statement encrypts the message*/
-        else {
-            x[i] = x[i] + key;//adds the encryption key to i'th value 
-            if(x[i] > 'Z')  {//This if statement rotates letters back to A if key is positive
-                x[i] = x[i] - 26;//if a letter plus a key adds up to a greater value than the ascii value of 'Z' it will minus 26 so it rotates back to 'A'
-        }
-            else if(x[i] < 'A')   {//This else if statement rotates numbers back to Z if key is negative
-                x[i] = x[i] +26;//if a letter plus a key adds up to a lesser value than the ascii value of 'A' it will add 26 so it rotates back to 'Z'
-         }
-         i++;//adds 1 onto i so it moves onto the next value in the loop
+     else {//while the i'th value of message does not equal null the loop continues
+        x[i] = ((x[i] - 65 + key ) % 26) + 65;
+        i++;
         }
     }
 }
