@@ -8,12 +8,12 @@ void encryption(char *x, int key);
 void CaesarEncrypt()  {
     
     // Initialise variables and string
-char message[100];
+char message[1000];
 int key, i=0;
 
     /*Prompts user to enter message and key and stores them as string array and integer value k*/
     printf("Enter message you want encrypted\n");
-    scanf("%s", message);
+    scanf("%[^\n]", message);
     printf("Enter the encryption key between 0 and 26\n");
     scanf("%d", &key);
 

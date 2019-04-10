@@ -15,7 +15,7 @@ int key, i=0;
     /*Prompts user to enter message and key and stores them as string array and integer value k*/
    
     printf("Enter message you want decrypted\n");
-    scanf("%s", message);
+    scanf("%[^\n]", message);
     printf("Enter the encryption key between 0 and 26\n");
     scanf("%d", &key);
 
