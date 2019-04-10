@@ -1,5 +1,5 @@
 #include <stdio.h> //Standard input and output
-
+#include "input.h"
 
 
 // declare function
@@ -9,13 +9,18 @@ void CaesarEncrypt()  {
     
     // Initialise variables and string
 char message[1000];
-int key, i=0;
+int i=0;
 
-    /*Prompts user to enter message and key and stores them as string array and integer value k*/
-    printf("Enter message you want encrypted\n");
-    scanf("%[^\n]", message);
-    printf("Enter the encryption key between 0 and 26\n");
-    scanf("%d", &key);
+FILE * input;
+input = fopen("input.txt", "r");
+if(message == NULL) {
+perror("fopen()");
+return;
+}
+
+fscanf(input, "%d %s", &key, message);
+
+printf("\n\n%d %s\n\n", &key, message);
 
     
     /* While loop Changes message from lower case to uppercase by testing if ascii value of the 
@@ -42,9 +47,9 @@ void encryption (char *x,int key){
             x[i] = x[i];
             i++;// adds 1 onto i to move onto the next value
         }
-     else {//while the i'th value of message does not equal null the loop continues
-        x[i] = ((x[i] - 65 + key ) % 26) + 65;//The letters are given a value between 0 and 25 then encrypted and given back there original ascii number.
-        i++;
+        else {//while the i'th value of message does not equal null the loop continues
+            x[i] = ((x[i] - 65 + key ) % 26) + 65;//The letters are given a value between 0 and 25 then encrypted and given back there original ascii number.
+            i++;
         }
     }
 }

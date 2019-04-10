@@ -1,5 +1,6 @@
 #include <stdio.h> //Standard input and output
 #include <math.h>
+#include "input.h"
 
 
 
