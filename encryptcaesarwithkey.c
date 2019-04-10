@@ -5,7 +5,7 @@
 // declare function
 void encryption(char *x, int key);
 
-int main()  {
+void CaesarEncrypt()  {
     
     // Initialise variables and string
 char message[100];

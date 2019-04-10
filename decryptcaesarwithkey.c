@@ -6,7 +6,7 @@
 // declare function
 void decryption(char *x, int key);
 
-int main()  {
+void CaesarDecrypt()  {
     
     // Initialise variables and string
 char message[100];
