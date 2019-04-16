@@ -17,28 +17,38 @@ The substitution cipher will read its key from the third line.
 */
 void encryption(char *x, int key);//declare encryption function.
 void decryption(char *x, int key);//declare decryption function.
+void substitution_encryption(char *x, char *y);
 
 
 int main() {//main function.
 
      char message[1000];//declare string variable.
      int key, i=0;//declare integer variable.
-     char substitutionkey[26];
+     char substitutionkey[28];
+     
 
     FILE * input;//pointer to a file.
     FILE * output;//pointer to a file.
     input = fopen("input.txt", "r");//open file for reading.
     output = fopen ("output.txt", "w");//open file for writing.
-    fscanf(input, "%d\n%[^\n]s\n%s", &key, message, substitutionkey);//scans from input file and stores integer as key and string as message.
+    fscanf(input, "%d\n%[^\n]s\n%[^\n]s", &key, message, substitutionkey);//scans from input file and stores integer as key and string as message.
     if(message == NULL) {//if statement to ensure data was read from file and show error if nothing was stored in message.
         perror("fopen()");
     return 0;
     }
+    printf("%s", substitutionkey);
     //while loop changes lower case letters to uppercase letters.
     while(message[i] != '\0') {//while the i'th value of message does not equal null the loop continues.
         if (message[i]>= 'a' && message[i] <= 'z')//if messasge has lower case letters eg. between 'a' and 'z'.
         message[i] = message [i] - 32;//add 32 onto lower case letters to make them Upper case.
         ++i;//adds one onto counter so loop goes through complete string.
+    }
+    i=0;
+    while(substitutionkey[i] != '\0') {//while the i'th value of message does not equal null the loop continues. message to upper case letters
+        if (substitutionkey[i]>= 'a' && substitutionkey[i] <= 'z')
+        substitutionkey[i] = substitutionkey[i] - 32;
+        ++i;
+        
     }
     //This switch case statement chooses what encryption method you would like to do and then completes the function in the case statement.
     switch (Task) {
@@ -46,13 +56,21 @@ int main() {//main function.
             encryption(message, key);//call encryption function to encrypt message with key.
             printf("%s\n", message);//encrypted message is printed to console.
             fprintf(output,"%s", message);//encrypted message is printed to file output.txt.
-            break; }//breaks from switch case statement
+            break; //breaks from switch case statement
+            }
         case '2': {// if task = 2 in header file then case 2 is selected.
             decryption(message, key);//call encryption function to encrypt message with key.
             printf("%s\n", message);//calls decryption function
+            fprintf(output,"%s", message);//decrypted message is printed to file output.txt.
+            break; //breaks from switch case statement
+            }
+        case '3': {//if task = 2 in header file then case 3 is selected
+            substitution_encryption(message, substitutionkey);
+            printf("%s\n", message);
             fprintf(output,"%s", message);//encrypted message is printed to file output.txt.
-            break; }//breaks from switch case statement
-        
+            break; //breaks from switch case statement
+            }
+
     }
 
 }
@@ -104,3 +122,18 @@ void decryption (char *x,int key) {
     }
 }
 // End of caesar decryption-------------------------------------------------------------------
+// Start of substitution encryption function---------------------------------------------------
+void substitution_encryption(char *x, char *y){
+    int i=0;
+    while (x[i] != '\0'){
+         if (x[i] < 'A' || x[i] > 'Z'){//All symbols below the ascii 'A' and above ascii 'Z' value are not encrypted 
+            x[i] = x[i];
+            i++;// adds 1 onto i to move onto the next value
+         }
+        else    {
+            int c = x[i] - 65;
+            x[i] = y[c];
+            i++;
+        }
+    }
+}
