@@ -7,19 +7,22 @@ void decryption(char *x, int key);
 
 
 int main() {
+
+    
+    
     switch (Task) {
-        case 1: 
-            void CaesarEncrypt ();//calls encryption function
-            break;
-        case 2:
+        case '1': {
+            char CaesarEncrypt ();//calls encryption function
+            break; }
+        case '2': {
             void CaesarDecrypt ();//calls decryption function
-            break;
+            break; }
         
     }
 
 }
-// Caesar encryption code------------------------------------------------------------------
-void CaesarEncrypt()  {
+// Caesar encryption function------------------------------------------------------------------
+char CaesarEncrypt()  {
     
     // Initialise variables and string
     char message[1000];
@@ -27,12 +30,14 @@ void CaesarEncrypt()  {
 
     FILE * input;
     input = fopen("input.txt", "r");
+    fscanf(input, "%d\n%[^\n]s", &key, message);
     if(message == NULL) {
         perror("fopen()");
     return;
     }
 
-fscanf(input, "%d %s", &key, message);
+
+
 
     
     /* While loop Changes message from lower case to uppercase by testing if ascii value of the 
@@ -47,6 +52,7 @@ fscanf(input, "%d %s", &key, message);
     //calls function to encrypt message and then print the result.
     encryption(message, key);
     printf("%s\n", message);
+    return "message";
 } 
 /*  Function definition. This function has a while loop that checks if the i'th value is a symbol or a letter
     via the first while if statements. If a symbol is found it sends out the value and continues to the next i value.
@@ -67,7 +73,7 @@ void encryption (char *x,int key){
 }
 //End of caesar encryption function----------------------------------------------------------------
 
-// Start of decryption function-------------------------------------------------------------------
+// Start of caesar decryption function-------------------------------------------------------------------
 void CaesarDecrypt()  {
     
     // Initialise variables and string
@@ -81,7 +87,7 @@ perror("fopen()");
 return;
 }
 
-fscanf(input, "%d %s", &key, message);
+fscanf(input, "%d\n%[^\n]s", &key, message);
     
     /* While loop Changes message from lower case to uppercase by testing if ascii value of the 
     letters are between a and z and then taking away 32 to make them a capital letter*/
