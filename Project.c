@@ -2,6 +2,19 @@
 #include <math.h>
 #include "input.h"//header file which has the task number in it.
 
+/* User interface: Changing what the Task is equal to in the header file (input.h) will choose between which task you would like to do.
+
+Task = 1    Caesar Cipher Encryption with key.
+Task = 2    Caesar Cipher Decryption with key.
+Task = 3    Substitution Cipher Encryption with key.
+Task = 4    Substitution Cipher Decryption with key.
+
+To input any text into the functions the file "input.txt" must be modified.
+The caesar cipher will read an integer key between 0 and 26 from the first line.
+All functions will read the message to be encrypted/decrypted from the second line.
+The substitution cipher will read its key from the third line.
+
+*/
 void encryption(char *x, int key);//declare encryption function.
 void decryption(char *x, int key);//declare decryption function.
 
@@ -10,12 +23,13 @@ int main() {//main function.
 
      char message[1000];//declare string variable.
      int key, i=0;//declare integer variable.
+     char substitutionkey[26];
 
     FILE * input;//pointer to a file.
     FILE * output;//pointer to a file.
     input = fopen("input.txt", "r");//open file for reading.
     output = fopen ("output.txt", "w");//open file for writing.
-    fscanf(input, "%d\n%[^\n]s", &key, message);//scans from input file and stores integer as key and string as message.
+    fscanf(input, "%d\n%[^\n]s\n%s", &key, message, substitutionkey);//scans from input file and stores integer as key and string as message.
     if(message == NULL) {//if statement to ensure data was read from file and show error if nothing was stored in message.
         perror("fopen()");
     return 0;
@@ -44,7 +58,7 @@ int main() {//main function.
 }
 // Caesar encryption function------------------------------------------------------------------//
 /*  Function definition. This function has a while loop that checks if the i'th value is a symbol or a letter
-    via the first while if statements. If a symbol is found it sends out the value and continues to the next i value.
+    via the first while if statements. The function has two inputs, an integer named key and a string named message. If a symbol is found it sends out the value and continues to the next i value.
     The capital letters left over are then given a value from A=0 to Z=26 by subtracting 65 from the ascii value.
     The encryption key is then added and modulus 26 used which makes letters greater than 25 rotate back to A */
 void encryption (char *x,int key){
@@ -60,12 +74,12 @@ void encryption (char *x,int key){
         }
     }
 }
-//End of caesar encryption function----------------------------------------------------------------
+// End of caesar encryption function---------------------------------------------------------------------
 
 // Start of caesar decryption function------------------------------------------------------------------- 
 
 /*  Function definition. This function has a while loop that checks if the i'th value is a symbol or a letter
-    via the first while if statements. If a symbol is found it sends out the value and continues to the next i'th value.
+    via the first while if statements. The inputs are an integer named key and a string named message. If a symbol is found it sends out the value and continues to the next i'th value.
     The capital letters left over are then given a value from A=0 to Z=26 by subtracting 65 from the ascii value.
     The encryption key is then added and modulus 26 used which makes letters greater than 25 rotate from Z to A */
 void decryption (char *x,int key) {
