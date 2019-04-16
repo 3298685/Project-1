@@ -12,7 +12,7 @@ int main() {
     
     switch (Task) {
         case '1': {
-            char CaesarEncrypt ();//calls encryption function
+            void CaesarEncrypt ();//calls encryption function
             break; }
         case '2': {
             void CaesarDecrypt ();//calls decryption function
@@ -22,7 +22,7 @@ int main() {
 
 }
 // Caesar encryption function------------------------------------------------------------------
-char CaesarEncrypt()  {
+void CaesarEncrypt()  {
     
     // Initialise variables and string
     char message[1000];
@@ -52,7 +52,7 @@ char CaesarEncrypt()  {
     //calls function to encrypt message and then print the result.
     encryption(message, key);
     printf("%s\n", message);
-    return "message";
+ 
 } 
 /*  Function definition. This function has a while loop that checks if the i'th value is a symbol or a letter
     via the first while if statements. If a symbol is found it sends out the value and continues to the next i value.
