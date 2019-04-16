@@ -1,3 +1,3 @@
-#define TASK 1;
+int Task = 1;
 
 
