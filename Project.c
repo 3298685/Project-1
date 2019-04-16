@@ -24,32 +24,32 @@ int main() {//main function.
 
      char message[1000];//declare string variable.
      int key, i=0;//declare integer variable.
-     char substitutionkey[28];
+     char subkey[100];
      
 
     FILE * input;//pointer to a file.
     FILE * output;//pointer to a file.
     input = fopen("input.txt", "r");//open file for reading.
     output = fopen ("output.txt", "w");//open file for writing.
-    fscanf(input, "%d\n%[^\n]s\n%[^\n]s", &key, message, substitutionkey);//scans from input file and stores integer as key and string as message.
-    if(message == NULL) {//if statement to ensure data was read from file and show error if nothing was stored in message.
+    fscanf(input, "%d\n%[^\n]s\n%[^\n]s", &key, message, subkey);//scans from input file and stores integer as key and string as message.
+    if(message == NULL || subkey == NULL) {//if statement to ensure data was read from file and show error if nothing was stored in message.
         perror("fopen()");
     return 0;
     }
-    printf("%s", substitutionkey);
-    //while loop changes lower case letters to uppercase letters.
+    printf("%s", subkey);
+    //while loop converts lower case letters to uppercase letters.
     while(message[i] != '\0') {//while the i'th value of message does not equal null the loop continues.
         if (message[i]>= 'a' && message[i] <= 'z')//if messasge has lower case letters eg. between 'a' and 'z'.
         message[i] = message [i] - 32;//add 32 onto lower case letters to make them Upper case.
         ++i;//adds one onto counter so loop goes through complete string.
     }
-    i=0;
-    while(substitutionkey[i] != '\0') {//while the i'th value of message does not equal null the loop continues. message to upper case letters
-        if (substitutionkey[i]>= 'a' && substitutionkey[i] <= 'z')
-        substitutionkey[i] = substitutionkey[i] - 32;
+    //while loop converts lowercase letters to uppercase.
+    while(subkey[i] != '\0') {//while the i'th value of message does not equal null the loop continues. message to upper case letters
+        if (subkey[i]>= 'a' && subkey[i] <= 'z')
+        subkey[i] = subkey[i] - 32;
         ++i;
-        
     }
+    
     //This switch case statement chooses what encryption method you would like to do and then completes the function in the case statement.
     switch (Task) {
         case '1': {// if task = 1 in header file then case 1 is selected.
@@ -64,8 +64,8 @@ int main() {//main function.
             fprintf(output,"%s", message);//decrypted message is printed to file output.txt.
             break; //breaks from switch case statement
             }
-        case '3': {//if task = 2 in header file then case 3 is selected
-            substitution_encryption(message, substitutionkey);
+        case '3': {//if task = 3 in header file then case 3 is selected
+            substitution_encryption(message, subkey);
             printf("%s\n", message);
             fprintf(output,"%s", message);//encrypted message is printed to file output.txt.
             break; //breaks from switch case statement
