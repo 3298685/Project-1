@@ -2,48 +2,55 @@
 #include <math.h>
 #include "input.h"//header file which has the task number in it.
 
-/* User interface: Changing what the Task is equal to in the header file (input.h) will choose between which task you would like to do.
+/* User interface: Changing what the Task is equal to in the header file (input.h) will choose between
+ which task you would like to do.
 
 Task = 1    Caesar Cipher Encryption with key.
 Task = 2    Caesar Cipher Decryption with key.
 Task = 3    Substitution Cipher Encryption with key.
 Task = 4    Substitution Cipher Decryption with key.
 
-To input any text into the functions the file "input.txt" must be modified.
+To input the caesar cipher key and message into the function the file "input.txt" must be modified.
 The caesar cipher will read an integer key between 0 and 26 from the first line.
 All functions will read the message to be encrypted/decrypted from the second line.
-The substitution cipher will read its key from the third line.
+
+The substitution message will read from the second line of tthe file input.txt. The key must be hardcoded into
+the string named subkey.
 
 */
 void encryption(char *x, int key);//declare encryption function.
 void decryption(char *x, int key);//declare decryption function.
 void substitution_encryption(char *x, char *y);
+void substitution_decryption(char *x, char *y, char*z);
 
 
 int main() {//main function.
 
      char message[1000];//declare string variable.
      int key, i=0;//declare integer variable.
-     char subkey[100];
+     char subkey[] = "qwertyuiopasdfghjklzxcvbnm";
+     char alphabet []  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
      
 
     FILE * input;//pointer to a file.
     FILE * output;//pointer to a file.
     input = fopen("input.txt", "r");//open file for reading.
     output = fopen ("output.txt", "w");//open file for writing.
-    fscanf(input, "%d\n%[^\n]s\n%[^\n]s", &key, message, subkey);//scans from input file and stores integer as key and string as message.
-    if(message == NULL || subkey == NULL) {//if statement to ensure data was read from file and show error if nothing was stored in message.
+    fscanf(input, "%d\n%[^\n]s", &key, message);//scans from input file and stores integer as key and string as message.
+    if(message == NULL) {//if statement to ensure data was read from file and show error if nothing was stored in message.
         perror("fopen()");
     return 0;
     }
-    printf("%s", subkey);
+    
     //while loop converts lower case letters to uppercase letters.
     while(message[i] != '\0') {//while the i'th value of message does not equal null the loop continues.
         if (message[i]>= 'a' && message[i] <= 'z')//if messasge has lower case letters eg. between 'a' and 'z'.
         message[i] = message [i] - 32;//add 32 onto lower case letters to make them Upper case.
         ++i;//adds one onto counter so loop goes through complete string.
     }
+
     //while loop converts lowercase letters to uppercase.
+    i = 0;
     while(subkey[i] != '\0') {//while the i'th value of message does not equal null the loop continues. message to upper case letters
         if (subkey[i]>= 'a' && subkey[i] <= 'z')
         subkey[i] = subkey[i] - 32;
@@ -70,6 +77,11 @@ int main() {//main function.
             fprintf(output,"%s", message);//encrypted message is printed to file output.txt.
             break; //breaks from switch case statement
             }
+        case '4': {//if task = 4 in header file then case 4 is selected
+            substitution_decryption(message, subkey, alphabet);
+            printf("%s\n", message);
+            fprintf(output,"%s", message);//decrypted message is printed to file output.txt.
+        }
 
     }
 
@@ -134,6 +146,29 @@ void substitution_encryption(char *x, char *y){
             int c = x[i] - 65;
             x[i] = y[c];
             i++;
+        }
+    }
+}
+//End substitution encryption function---------------------------------------------
+//Start of substitution decryption function-------------------------------------
+void substitution_decryption(char *x, char *y, char *z){
+    int i=0;
+    while (x[i] != '\0'){
+         int c=0;
+         if (x[i] < 'A' || x[i] > 'Z'){//All symbols below the ascii 'A' and above ascii 'Z' value are not encrypted 
+            x[i] = x[i];
+            i++;// adds 1 onto i to move onto the next value
+         }
+        else    {
+             while (c < 30) {
+                if (x[i] == y[c]){
+                   x[i] = z[c];
+                   break;
+                }
+                else
+                c++;
+            }
+            i++; 
         }
     }
 }
