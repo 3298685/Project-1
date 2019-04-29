@@ -90,6 +90,7 @@ int main() {//main function.
                 printf("%s\n", message);//prints all possible decrypted messages to the console
                 fprintf(output,"%d\n%s\n",counter, message);//encrypted message is printed to file output.txt.
                 counter++;//adds one onto counter so it decrypts the next possible message.
+                break;
                 }
         }
 
